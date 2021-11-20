@@ -5,10 +5,10 @@ public class Edge<T> {
 	//Attributes 
 	private T start;//start vertex
 	private T end;//end vertex
-	private T weight;//weight of the edge
+	private double weight;//weight of the edge
 
 	//Constructor
-	public Edge(T start, T end, T weight) {
+	public Edge(T start, T end, double weight) {
 		this.start = start;
 		this.end = end;
 		this.weight = weight;
@@ -31,11 +31,11 @@ public class Edge<T> {
 		return end;
 	}
 	
-	public void setWeight(T weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 	
-	public T getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 

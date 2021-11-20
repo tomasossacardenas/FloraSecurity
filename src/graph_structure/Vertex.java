@@ -1,10 +1,10 @@
 package graph_structure;
 
-public class Vertex<T> implements Comparable<Vertex<T>>{
+public class Vertex<T> {
 	
 	//Attributes
 	private T value;
-	//private int weight
+	private int weight;
 	
 	//Constructor
 	public Vertex(T object) {
@@ -20,13 +20,18 @@ public class Vertex<T> implements Comparable<Vertex<T>>{
 		return value;
 	}
 
-
-
-	@Override
-	public int compareTo(Vertex<T> o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	
+
+
+
 
 
 	

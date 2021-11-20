@@ -41,6 +41,8 @@ public class Node<T> {
 	public T getElement() {
 		return element;
 	}
+
+
 	
 
 
