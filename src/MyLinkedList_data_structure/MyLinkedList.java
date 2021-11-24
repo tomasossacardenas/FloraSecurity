@@ -115,7 +115,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 					first=null;
 				}			
 			}
-		}	
+		}
 	}
 	
 	public Node<T> getNode(Node<T>searchedNode){

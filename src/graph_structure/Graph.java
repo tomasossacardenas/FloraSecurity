@@ -1,9 +1,7 @@
 package graph_structure;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
-
 import MyLinkedList_data_structure.MyLinkedList;
 import MyLinkedList_data_structure.Node;
 
@@ -34,7 +32,7 @@ public class Graph<T> {
         
         Edge<T> edge = new Edge<>(start,end,weight);
         boolean hasIt = false;
-        for (int i=0;i<edges_list.size();i++) {
+        for (int i=0;i<edges_list.size() && !hasIt;i++) {
         	if (edges_list.get(i).getStart().equals(start) && edges_list.get(i).getEnd().equals(end)) {
         		hasIt = true;
         	}
@@ -42,9 +40,8 @@ public class Graph<T> {
         
         if (hasIt==false) {
         	edges_list.add(edge);
-        }
-        
-          
+        	adj_list.get(start).createNode(end);        	
+        }         
     }
 	 
     public ArrayList<Node<T>> adjacent(T value) {
@@ -59,25 +56,23 @@ public class Graph<T> {
     			current = current.getNext();
     		}
 
-    	}
+    	}    	
     	return adjacentV;    	
     }
     
     
     
-    public T getVertex(T value) {
-    	boolean exit = false;
-    	T vertex = null;
-    	Enumeration<T> keys = adj_list.keys();
-    	    	
-    	while (keys.hasMoreElements() && !exit) {
-    		if(keys.equals(value)) {
-    			vertex = value;
-    			exit = true;
-    		}    	
+    public MyLinkedList<T> getVertex(T value) {
+    	MyLinkedList<T> temp = new MyLinkedList<>();    	
+    	if (adj_list.containsKey(value)==true) {
+    		temp.createNode(value);
+    		Node<T> current = adj_list.get(value).getFirst();
+    		while (current!=null) {
+    			temp.createNode(current.getElement());
+    			current = current.getNext();
+    		}    		
     	}
-    	return vertex;
-    	
+    	return temp;    	
     }
     
     public Edge<T> getEdge(double weight) {
@@ -102,32 +97,41 @@ public class Graph<T> {
     	return empty;
     }
     
-    public Node<T> deleteVertex(Node<T> delete) {
-    	MyLinkedList<T> temp = adj_list.get(delete.getElement());//Obtengo la lista adyacente de la key    	
+    public T deleteVertex(T delete) {
+    	MyLinkedList<T> temp = adj_list.get(delete);//Obtengo la lista adyacente de la key    	
+    	T nodeDelete = delete;
+    	Node<T> findAD = new Node<>(delete);
     	Node<T> current = temp.getFirst();
 		while(current!=null) {//elimino delete de cada nodo adyacente
-			adj_list.get(current.getElement()).deleteNode(delete);
+			adj_list.get(current.getElement()).deleteNode(findAD);
 			current = current.getNext();
 		}
 		
-		adj_list.remove(delete.getElement());
-		return delete;
+		adj_list.remove(delete);
+		return nodeDelete;
     }
     
-    public Edge<T> deleteEdge(double weight) {// al eliminar la arista, su peso se pone en 0
-    	//T start = null;
-    	//T end = null;
-    	Edge<T> edge = null;
+    public void deleteEdge(double weight) {  	
+    	ArrayList<Node<T>> temp= null;
+    	T start = null;
+    	T end = null;    	
     	boolean exit = false;
-    	for (int i=0;i<edges_list.size() && !exit;i++) {
+    	for (int i=0;i<edges_list.size() && !exit;i++) {    		
     		if (edges_list.get(i).getWeight()==weight) {
-    			//start = edges_list.get(i).getStart();
-    			//end = edges_list.get(i).getEnd();
-    			edges_list.get(i).setWeight(0);
-    			edge = edges_list.get(i);
+    			start = edges_list.get(i).getStart();    				
+    			end = edges_list.get(i).getEnd();
+    			edges_list.remove(i);
     			exit = true;
     		}
-    	}    	
-    	return edge;   	
+    	}  
+    	
+    	temp = adjacent(start);
+
+    	for (int j=0;j<temp.size();j++) {
+    		if (temp.get(j).getElement().equals(end)) {
+    			adj_list.get(start).deleteNode(temp.get(j));   	
+    		}
+    	}   	
+    	//adj_list.replace(start, adj_list.get(start), temp);   	
     }
 }

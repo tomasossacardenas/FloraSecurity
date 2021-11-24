@@ -1,31 +1,44 @@
 package model;
 
-import MyLinkedList_data_structure.Node;
 import graph_structure.Graph;
+import graph_structure.Vertex;
 import org.junit.Assert;
 import org.junit.Test;
+
+import MyLinkedList_data_structure.Node;
 
 import java.util.ArrayList;
 
 public class GraphTest {
 
-    private Graph<Integer> graph;
+    private Graph<Vertex<Integer>> graph;
+    private ArrayList<Vertex<Integer>> list;
 
-    public void sc1() {
-        graph = new Graph<>();
-        graph.createVertex(10);
-        graph.createVertex(5);
-        graph.createEdge(10, 5, 3);
+    public void sc1() {    	
+        graph = new Graph<>();    
+        list = new ArrayList<>();
+        Vertex<Integer> v1 = new Vertex<>(10);
+        Vertex<Integer> v2 = new Vertex<>(5);
+        graph.createVertex(v1);
+        graph.createVertex(v2);
+        graph.createEdge(v1, v2, 3);
+        list.add(v1);
+        list.add(v2);
     }
 
     public void sc2() {
         graph = new Graph<>();
     }
 
-    public void sc3() {
+    public void sc3() {    	
         graph = new Graph<>();
-        graph.createVertex(10);
-        graph.createVertex(5);
+        list = new ArrayList<>();
+        Vertex<Integer> v1 = new Vertex<>(10);
+        Vertex<Integer> v2 = new Vertex<>(5);
+        graph.createVertex(v1);
+        graph.createVertex(v2);
+        list.add(v1);
+        list.add(v2);
     }
 
     //Graph Tests
@@ -42,7 +55,8 @@ public class GraphTest {
     public void createVertexTest() {
         sc2();
         boolean initialEmptyState = graph.isEmpty(); //Should be true, because graph is empty.
-        graph.createVertex(5);
+        Vertex<Integer> v2 = new Vertex<>(5);
+        graph.createVertex(v2);
         boolean finalEmptyState = graph.isEmpty(); //Should be false, because vertex has been added.
         Assert.assertTrue(initialEmptyState);
         Assert.assertFalse(finalEmptyState);
@@ -51,27 +65,30 @@ public class GraphTest {
     @Test
     public void removeVertexTest() {
         sc2();
-        graph.createVertex(5);
+        Vertex<Integer> v2 = new Vertex<>(5);
+        graph.createVertex(v2);
         boolean initialEmptyState = graph.isEmpty(); //Should be false, because graph is not empty.
-        graph.deleteVertex(); //Give previously created vertex as parameter.
+        graph.deleteVertex(v2); //Give previously created vertex as parameter.
         boolean finalEmptyState = graph.isEmpty(); //Should be true. The only vertex was deleted.
         Assert.assertTrue(finalEmptyState);
         Assert.assertFalse(initialEmptyState);
     }
 
     @Test
+    
     public void getVertexTest() {
         sc1();
-        int expected = 5;
-        int returned = graph.getVertex(expected);
+        Vertex<Integer> expected = list.get(1) ;        
+        Vertex<Integer> returned = graph.getVertex(expected).getFirst().getElement();
         Assert.assertEquals(expected, returned);
     }
+    
 
     @Test
     public void adjacentTest() {
-        sc1();
-        int vertex = graph.getVertex(5);
-        ArrayList<Node<Integer>> adjacentList = graph.adjacent(vertex);
+        sc1();        
+        Vertex<Integer> vertex = graph.getVertex(list.get(0)).getFirst().getElement();
+        ArrayList<Node<Vertex<Integer>>> adjacentList = graph.adjacent(vertex);
         Assert.assertEquals(1, adjacentList.size());
     }
 
@@ -79,11 +96,14 @@ public class GraphTest {
 
     @Test
     public void createEdgeTest() {
-        sc3();
-        ArrayList<Node<Integer>> adjacentList = graph.adjacent(10);
+        sc3();        
+        ArrayList<Node<Vertex<Integer>>> adjacentList = graph.adjacent(list.get(0));
         boolean initialAdjacentListState = adjacentList.isEmpty(); //Should be true. No adjacent vertex.
-        graph.createEdge(10, 5, 3);
-        boolean finalAdjacentListState = adjacentList.isEmpty(); //Should be false. 5 and 10 are now adjacent vertexes.
+        
+        graph.createEdge(list.get(0), list.get(1), 3);
+        adjacentList = graph.adjacent(list.get(0));
+        
+        boolean finalAdjacentListState = adjacentList.isEmpty(); //Should be false. 5 and 10 are now adjacent vertexes.        
         Assert.assertTrue(initialAdjacentListState);
         Assert.assertFalse(finalAdjacentListState);
     }
@@ -91,12 +111,14 @@ public class GraphTest {
     @Test
     public void removeEdgeTest() {
         sc1();
-        ArrayList<Node<Integer>> adjacentList = graph.adjacent(10);
+        ArrayList<Node<Vertex<Integer>>> adjacentList = graph.adjacent(list.get(0));
         boolean initialAdjacentListState = adjacentList.isEmpty(); //Should be false. 5 and 10 are adjacent vertexes.
         graph.deleteEdge(3);
+        adjacentList = graph.adjacent(list.get(0));
         boolean finalAdjacentListState = adjacentList.isEmpty(); //Should be true. 5 and 10 are not any more adjacent vertexes.
-        Assert.assertTrue(finalAdjacentListState);
         Assert.assertFalse(initialAdjacentListState);
+        Assert.assertTrue(finalAdjacentListState);
+        
     }
 
 }
