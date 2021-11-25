@@ -9,7 +9,6 @@ import graph_structure.Vertex;
 public class GraphicTest {
 	
 	Graphic graphic=new Graphic();
-	private int[][] matrix;
 	
 	public void sc1() {    	
 		
