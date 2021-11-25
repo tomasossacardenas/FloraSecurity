@@ -6,6 +6,7 @@ import model.Graphic;
 
 public class Main {
 	
+	public final static int INF = 9999;
 	private static Graphic graphic;
 
 	public static void main(String[] args) {
@@ -73,7 +74,7 @@ public class Main {
 		graph.createEdge(v14, v13, 4);
 		graph.createEdge(v8, v12, 11);
 		
-		int[][] adjacencyMatrix =				
+		int[][] adjacencyMatrixD =				
 			  { { 0, 1, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 1, 0, 2, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 2, 0, 3, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -90,7 +91,27 @@ public class Main {
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 4, 0, 5, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 5, 0, 6 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 6, 0 } };
-		graphic.dijkstra(adjacencyMatrix, 0);
+		graphic.dijkstra(adjacencyMatrixD, 0);
+		
+		int[][] adjacencyMatrixF =				
+			  { { 0, 1, INF, INF, 9, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF },
+				{ 1, 0, 2, INF, INF, 23, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF },
+				{ INF, 2, 0, 3, INF, INF, 24, INF, INF, INF, INF, INF, INF, INF, INF, INF },
+				{ INF, INF, 3, 0, INF, INF, INF, 10, INF, INF, INF, INF, INF, INF, INF, INF },
+				{ 9, INF, INF, INF, 0, 21, INF, INF, 8, INF, INF, INF, INF, INF, INF, INF },
+				{ INF, 23, INF, INF, 21, 0, 20, INF, INF, 18, INF, INF, INF, INF, INF, INF },
+				{ INF, INF, 24, INF, INF, 20, 0, 22, INF, INF, 19, INF, INF, INF, INF, INF },
+				{ INF, INF, INF, 10, INF, INF, 22, 0, INF, INF, INF, 11, INF, INF, INF, INF },
+				{ INF, INF, INF, INF, 8, INF, INF, INF, 0, 13, INF, INF, 7, INF, INF, INF },
+				{ INF, INF, INF, INF, INF, 18, INF, INF, 13, 0, 16, INF, INF, 14, INF, INF },
+				{ INF, INF, INF, INF, INF, INF, 19, INF, INF, 6, 0, 17, INF, INF, 15, INF },
+				{ INF, INF, INF, INF, INF, INF, INF, 11, INF, INF, 17, 0, INF, INF, INF, 12 },
+				{ INF, INF, INF, INF, INF, INF, INF, INF, 7, INF, INF, INF, 0, 4, INF, INF },
+				{ INF, INF, INF, INF, INF, INF, INF, INF, INF, 14, INF, INF, 4, 0, 5, INF },
+				{ INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, 15, INF, INF, 5, 0, 6 },
+				{ INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, 12, INF, INF, 6, 0 } };
+		graphic.floydWarshall(adjacencyMatrixF);
+		
 		
 		
 		
