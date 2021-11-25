@@ -9,6 +9,7 @@ import graph_structure.Vertex;
 public class GraphicTest {
 	
 	Graphic graphic=new Graphic();
+	private int[][] matrix;
 	
 	public void sc1() {    	
 		
@@ -31,7 +32,6 @@ public class GraphicTest {
 		graph.createEdge(v2, v3, 5);
     }
 	
-	
 	@Test
 	public void dijsktraTest() {
 		sc1();
@@ -50,6 +50,33 @@ public class GraphicTest {
 		Assert.assertEquals(shortestDistancesWaited[2], graphic.dijkstra(adjacencyMatrixD, 0)[2]);
 		Assert.assertEquals(shortestDistancesWaited[3], graphic.dijkstra(adjacencyMatrixD, 0)[3]);
 	}
-	
+
+	@Test
+	public void floydTest() {
+		int inf = Integer.MAX_VALUE;
+
+		int[][] matrix = {
+				{0, 4, 2, inf},
+				{4, 0, 1, 2},
+				{2, 1, 0, 5},
+				{inf, 2, 5, 0}
+		};
+
+		int[][] expected = {
+				{0, 3, 2, 5},
+				{3, 0, 1, 2},
+				{2, 1, 0, 3},
+				{5, 2, 3, 0}
+		};
+
+		int[][] actual = graphic.floydWarshallV2(matrix);
+
+		for (int i = 0; i < expected.length; i++) {
+			for (int j = 0; j < actual.length; j++) {
+				Assert.assertEquals(actual[i][j],expected[i][j]);
+			}
+		}
+
+	}
 	
 }

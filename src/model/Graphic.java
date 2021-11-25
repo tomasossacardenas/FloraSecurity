@@ -165,6 +165,22 @@ public class Graphic {
 		// Print the shortest distance matrix
 		printSolution(dist);
 	}
+
+	public int[][] floydWarshallV2(int[][] matrix) {
+		int size = matrix.length;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				for (int k = 0; k < size; k++) {
+					if (matrix[j][i] != Integer.MAX_VALUE && matrix[i][k] != Integer.MAX_VALUE) {
+						if (matrix[j][k] > matrix[j][i] + matrix[i][k]) {
+							matrix[j][k] = matrix[j][i] + matrix[i][k];
+						}
+					}
+				}
+			}
+		}
+		return matrix;
+	}
 		  
 	public void printSolution(int dist[][]){
 
