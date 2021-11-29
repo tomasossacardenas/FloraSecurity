@@ -203,6 +203,26 @@ public class Main {
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 4, 0 } };//15
 			   // 0--1--2--3--4--5--6--7--8--9-10--11-12-13-14-15
 		graphic.dijkstra(adjacencyMatrixD, 0);
+
+		int[][] adjacencyMatrixF = {
+				{0, 1, INF, INF, 2, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF},
+				{1, 0, 7, INF, INF, 5, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF},
+				{INF, 7, 0, 10, INF, INF, 9, INF, INF, INF, INF, INF, INF, INF, INF, INF},
+				{INF, INF, 10, 0, INF, INF, INF, 8, INF, INF, INF, INF, INF, INF, INF, INF},
+				{2, INF, INF, INF, 0, 4, INF, INF, 8, INF, INF, INF, INF, INF, INF, INF},
+				{INF, 5, INF, INF, 4, 0, 2, INF, INF, 2, INF, INF, INF, INF, INF, INF},
+				{INF, INF, 9, INF, INF, 2, 0, 5, INF, INF, 1, INF, INF, INF, INF, INF},
+				{INF, INF, INF, 8, INF, INF, 5, 0, INF, INF, INF, 3, INF, INF, INF, INF},
+				{INF, INF, INF, INF, 8, INF, INF, INF, 0, 3, INF, INF, 1, INF, INF, INF},
+				{INF, INF, INF, INF, INF, 2, INF, INF, 3, 0, 2, INF, INF, 4, INF, INF},
+				{INF, INF, INF, INF, INF, INF, 1, INF, INF, 2, 0, 12, INF, INF, 2, INF},
+				{INF, INF, INF, INF, INF, INF, INF, 3, INF, INF, 12, 0, INF, INF, INF, 9},
+				{INF, INF, INF, INF, INF, INF, INF, INF, 1, INF, INF, INF, 0, 4, INF, INF},
+				{INF, INF, INF, INF, INF, INF, INF, INF, INF, 4, INF, INF, 3, 0, 4, INF},
+				{INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, 2, INF, INF, 4, 0, 4},
+				{INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, 9, INF, INF, 4, 0}
+		};
+		graphic.floydWarshall(adjacencyMatrixF);
 		
 		
 	}
