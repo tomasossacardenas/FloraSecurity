@@ -36,7 +36,7 @@ public class MainController implements Initializable {
 
 
 	public MainController() {
-
+		graphic = new Graphic();
 	}
 
 	@Override
