@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="668.0">
+      <VBox alignment="CENTER" prefHeight="850.0" prefWidth="668.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="668.0" spacing="10.0" style="-fx-background-color: #010104;">
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="668.0" spacing="10.0" style="-fx-background-color: #010104;">
                <children>
                   <Label layoutX="171.0" layoutY="27.0" styleClass="bold" text="Origen" />
                   <ChoiceBox fx:id="cbOrigen" layoutX="271.0" layoutY="23.0" prefWidth="150.0" />
@@ -28,9 +28,9 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <ImageView fitHeight="466.0" fitWidth="415.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="740.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/map.jpeg" />
+                  <Image url="@../../images/FloraMap.png" />
                </image>
             </ImageView>
             <TextArea fx:id="taRoute" editable="false" prefHeight="91.0" prefWidth="668.0" text="Seleccione su origen, su destino y el tipo de ruta que desee." wrapText="true" />
