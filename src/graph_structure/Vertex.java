@@ -3,12 +3,13 @@ package graph_structure;
 public class Vertex<T> {
 	
 	//Attributes
-	private T value;
+	private T value;	
 	private int weight;
 	
 	//Constructor
 	public Vertex(T object) {
 		this.value = object;
+		
 	}
 
 	//Getter and setter
@@ -27,15 +28,5 @@ public class Vertex<T> {
 	public int getWeight() {
 		return weight;
 	}
-
-	
-
-
-
-
-
-	
-
-	
 
 }

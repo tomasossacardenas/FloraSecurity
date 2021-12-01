@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -10,27 +11,29 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="880.0" prefWidth="668.0">
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="668.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #010104;">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="668.0" spacing="10.0" style="-fx-background-color: #010104;">
                <children>
-                  <Label styleClass="bold" text="Destino" />
-                  <ChoiceBox fx:id="cbDestino" prefWidth="150.0" />
                   <Label layoutX="171.0" layoutY="27.0" styleClass="bold" text="Origen" />
                   <ChoiceBox fx:id="cbOrigen" layoutX="271.0" layoutY="23.0" prefWidth="150.0" />
+                  <Label styleClass="bold" text="Destino" />
+                  <ChoiceBox fx:id="cbDestino" prefWidth="150.0" />
                   <Button mnemonicParsing="false" onAction="#fastRoute" text="Ruta Rápida" />
                   <Button layoutX="527.0" layoutY="23.0" mnemonicParsing="false" onAction="#secureRoute" text="Ruta Segura" />
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <ImageView fitHeight="740.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="466.0" fitWidth="415.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/FloraMap.png" />
+                  <Image url="@../../icons/map.jpeg" />
                </image>
             </ImageView>
-            <TextArea fx:id="taRoute" editable="false" prefHeight="90.0" prefWidth="668.0" text="Seleccione su origen, su destino y el tipo de ruta que desee." wrapText="true" />
+            <TextArea fx:id="taRoute" editable="false" prefHeight="91.0" prefWidth="668.0" text="Seleccione su origen, su destino y el tipo de ruta que desee." wrapText="true" />
          </children>
       </VBox>
    </children>

@@ -25,7 +25,7 @@ public class MainGUI extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/ui/styles/main.css");
         primaryStage.setTitle("Flora Security");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(false);        
         primaryStage.setScene(scene);
         primaryStage.show();
     }
