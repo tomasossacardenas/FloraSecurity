@@ -12,7 +12,7 @@ public class Graphic {
 	public ArrayList<String> messageList; 
 	
 	public Graphic() {
-		this.message = " ";
+		this.message = "";
 		this.messageList = new ArrayList<>();	
 		
 	}
@@ -117,7 +117,7 @@ public class Graphic {
 				printPath(vertexIndex, parents);
 				//System.out.println("MESSAGE:"+message);
 				messageList.add(message);
-				message = " ";
+				message = "";
 			}
 		}
 	}
@@ -160,7 +160,7 @@ public class Graphic {
 				}
 			}
 		}
-		printSolution(matrix);
+		//printSolution(matrix);
 		return matrix;
 	}
 	

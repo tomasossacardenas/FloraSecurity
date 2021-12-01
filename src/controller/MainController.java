@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,8 +16,9 @@ import graph_structure.Vertex;
 public class MainController implements Initializable {
 
 	public final  int INF = 9999;
+	
 	private Graphic graphic;
-
+		
 	@FXML
 	private ChoiceBox<String> cbDestino;
 
@@ -33,42 +36,25 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		cbDestino.getItems().addAll(
-				"Domino's Pizza",
+		ObservableList<String> locations = FXCollections.observableArrayList("Domino's Pizza",
 				"Patios de la Flora",
 				"PriceSmart",
 				"Centro Empresa",
 				"Colsubsidio",
 				"Olivenza",
-				"Santa Mar铆a de los Vientos",
-				"Balc贸n de las Flores",
+				"Santa Mar韆 de los Vientos",
+				"Balc髇 de las Flores",
 				"Cheers",
-				"Conjunto Arag贸n",
+				"Conjunto Arag醤",
 				"Harold Montes",
 				"Parque de las Flores",
 				"Santinis",
 				"Torremolinos",
 				"BBVA",
-				"C&M Consultants"
-				);
-		cbOrigen.getItems().addAll(
-				"Domino's Pizza",
-				"Patios de la Flora",
-				"PriceSmart",
-				"Centro Empresa",
-				"Colsubsidio",
-				"Olivenza",
-				"Santa Mar铆a de los Vientos",
-				"Balc贸n de las Flores",
-				"Cheers",
-				"Conjunto Arag贸n",
-				"Harold Montes",
-				"Parque de las Flores",
-				"Santinis",
-				"Torremolinos",
-				"BBVA",
-				"C&M Consultants"
-				);
+				"C&M Consultants");
+		cbDestino.setItems(locations);
+		cbOrigen.setItems(locations);
+
 	}
 
 	private boolean checkFields() {
@@ -82,68 +68,101 @@ public class MainController implements Initializable {
 
 	@FXML
 	public void fastRoute(ActionEvent event) {
-		String [] route ;
-		String finalRoute = "Ruta: ";
-		
+		String [] route = null;
+		String finalRoute = "Ruta:"+"\nOrigen: "+cbOrigen.getSelectionModel().getSelectedItem()+"     "
+							+ "Destino: "+cbDestino.getSelectionModel().getSelectedItem()+"\n";
+
 		if(checkFields()) {			
-			bestFasterWay();
-			if (cbOrigen.getSelectionModel().isSelected(0)) {
+			bestFasterWay();			
+			
+			if (cbDestino.getSelectionModel().getSelectedIndex()>cbOrigen.getSelectionModel().getSelectedIndex()) {
+				route = graphic.getMessageList().get(cbDestino.getSelectionModel().getSelectedIndex()-1).split(" ");
 				
-				route = graphic.getMessageList().get(cbDestino.getSelectionModel().getSelectedIndex()).split(" ");
-				
-				for (int i=0;i<=route.length;i++) {					
-					cbOrigen.getSelectionModel().select(i);
-					if (i==route.length) {
-						finalRoute += cbOrigen.getSelectionModel().getSelectedItem();
-					}else {
-						finalRoute += cbOrigen.getSelectionModel().getSelectedItem() + " -> " ;
-					}
-					
-					
-					
-				}
-				
+			}else if (cbDestino.getSelectionModel().getSelectedIndex()<cbOrigen.getSelectionModel().getSelectedIndex()) {
+				route = graphic.getMessageList().get(cbDestino.getSelectionModel().getSelectedIndex()).split(" ");				
 			}else {
+				taRoute.setText("Ya te encuentras en el lugar a donde deseas ir");
 				
 			}
+			/*		
+			for (int h =0;h<route.length;h++) {
+				System.out.println("ROUTE: "+route[h]);
+			}
+			*/
+			boolean stop = false;
+			if (route!=null) {
+				for (int i=0;i<route.length;i++) {
+					for (int j=0;j<=cbOrigen.getItems().size() && !stop;j++) {
+						
+						if (Integer.parseInt(route[i])==j) {
+							cbOrigen.getSelectionModel().select(j);
+							if (i==route.length-1) {
+								finalRoute += cbOrigen.getSelectionModel().getSelectedItem();
+							}else {
+								finalRoute += cbOrigen.getSelectionModel().getSelectedItem() + " -> " ;
+							}	
+							
+							stop = true;
+						}
+					}
+					
+					stop = false;
+				}
 			
-			taRoute.setText(finalRoute);
-
+				taRoute.setText(finalRoute);		
+			}
+			
 		}
+		cbOrigen.getSelectionModel().clearSelection();
+		cbDestino.getSelectionModel().clearSelection();
 	}
 
 	@FXML
 	public void secureRoute(ActionEvent event) {
-		String [] route ;
-		String finalRoute = "Ruta: ";
-		
-		if(checkFields()) {
+		String [] route = null;
+		String finalRoute = "Ruta:"+"\nOrigen: "+cbOrigen.getSelectionModel().getSelectedItem()+"     "
+							+ "Destino: "+cbDestino.getSelectionModel().getSelectedItem()+"\n";
+
+		if(checkFields()) {			
 			bestSecureWay();
 			
-			if (cbOrigen.getSelectionModel().isSelected(0)) {
+			
+			if (cbDestino.getSelectionModel().getSelectedIndex()>cbOrigen.getSelectionModel().getSelectedIndex()) {
+				route = graphic.getMessageList().get(cbDestino.getSelectionModel().getSelectedIndex()-1).split(" ");
 				
-				route = graphic.getMessageList().get(cbDestino.getSelectionModel().getSelectedIndex()).split(" ");
-				
-				for (int i=0;i<=route.length;i++) {					
-					cbOrigen.getSelectionModel().select(i);
-					if (i==route.length) {
-						finalRoute += cbOrigen.getSelectionModel().getSelectedItem();
-					}else {
-						finalRoute += cbOrigen.getSelectionModel().getSelectedItem() + " -> " ;
-					}
-					
-					
-					
-				}
-				
+			}else if (cbDestino.getSelectionModel().getSelectedIndex()<cbOrigen.getSelectionModel().getSelectedIndex()) {
+				route = graphic.getMessageList().get(cbDestino.getSelectionModel().getSelectedIndex()).split(" ");				
 			}else {
-				//Usar el algoritmo de Floyd
+				taRoute.setText("Ya te encuentras en el lugar a donde deseas ir");
 			}
 			
-			taRoute.setText(finalRoute);
+		
+			boolean stop = false;
 			
-			
+			if (route!=null) {
+				for (int i=0;i<route.length;i++) {
+					for (int j=0;j<=cbOrigen.getItems().size() && !stop;j++) {
+						
+						if (Integer.parseInt(route[i])==j) {
+							cbOrigen.getSelectionModel().select(j);
+							if (i==route.length-1) {
+								finalRoute += cbOrigen.getSelectionModel().getSelectedItem();
+							}else {
+								finalRoute += cbOrigen.getSelectionModel().getSelectedItem() + " -> " ;
+							}	
+							
+							stop = true;
+						}
+					}
+					
+					stop = false;
+				}
+				
+				taRoute.setText(finalRoute);
+			}		
 		}
+		cbOrigen.getSelectionModel().clearSelection();
+		cbDestino.getSelectionModel().clearSelection();
 	}
 
 	public void bestSecureWay() {
@@ -228,7 +247,7 @@ public class MainController implements Initializable {
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 4, 0, 4 },//14
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 4, 0 } };//15
 		// 0--1--2--3--4--5--6--7--8--9-10--11-12-13-14-15
-		graphic.dijkstra(adjacencyMatrixD, 0);
+		graphic.dijkstra(adjacencyMatrixD, cbOrigen.getSelectionModel().getSelectedIndex());
 
 		int[][] adjacencyMatrixF = {
 				{0, 1, INF, INF, 2, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF},
@@ -336,7 +355,7 @@ public class MainController implements Initializable {
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 4, 0, 5, 0 },
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 5, 0, 6 },
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 6, 0 } };
-		graphic.dijkstra(adjacencyMatrixD, 0);
+		graphic.dijkstra(adjacencyMatrixD, cbOrigen.getSelectionModel().getSelectedIndex());
 
 		int[][] adjacencyMatrixF =				
 			{ { 0, 1, INF, INF, 9, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF, INF },
