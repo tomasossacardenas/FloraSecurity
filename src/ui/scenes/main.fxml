@@ -30,7 +30,7 @@
             </HBox>
             <ImageView fitHeight="740.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/FloraMap.png" />
+                  <Image url="@../../icons/map.jpeg" />
                </image>
             </ImageView>
             <TextArea fx:id="taRoute" editable="false" prefHeight="91.0" prefWidth="668.0" text="Seleccione su origen, su destino y el tipo de ruta que desee." wrapText="true" />

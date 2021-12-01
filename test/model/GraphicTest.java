@@ -8,10 +8,10 @@ import graph_structure.Vertex;
 
 public class GraphicTest {
 	
-	Graphic graphic=new Graphic();
+	private Graphic graphic;
 	
 	public void sc1() {    	
-		
+		graphic=new Graphic();
 		Graph<Vertex<Integer>> graph = new Graph<Vertex<Integer>>();
 		
 		Vertex<Integer> v0 = new Vertex<>(0);
@@ -52,6 +52,7 @@ public class GraphicTest {
 
 	@Test
 	public void floydTest() {
+		graphic=new Graphic();
 		int inf = Integer.MAX_VALUE;
 
 		int[][] matrix = {
