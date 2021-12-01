@@ -28,7 +28,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <ImageView fitHeight="740.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="740.0" fitWidth="668.0" onMouseDragged="#windowDragged" onMousePressed="#windowPressed" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../icons/map.jpeg" />
                </image>

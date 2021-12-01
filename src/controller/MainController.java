@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.Graphic;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +19,9 @@ public class MainController implements Initializable {
 	public final  int INF = 9999;
 	
 	private Graphic graphic;
+
+	private double xOffset = 0;
+	private double yOffset = 0;
 	
 		
 	@FXML
@@ -42,10 +47,10 @@ public class MainController implements Initializable {
 				"Centro Empresa",
 				"Colsubsidio",
 				"Olivenza",
-				"Santa María de los Vientos",
-				"Balcón de las Flores",
+				"Santa Marï¿½a de los Vientos",
+				"Balcï¿½n de las Flores",
 				"Cheers",
-				"Conjunto Aragán",
+				"Conjunto Aragï¿½n",
 				"Harold Montes",
 				"Parque de las Flores",
 				"Santinis",
@@ -55,6 +60,20 @@ public class MainController implements Initializable {
 		cbDestino.setItems(locations);
 		cbOrigen.setItems(locations);
 
+	}
+
+	@FXML
+	void windowDragged(MouseEvent event) {
+		Stage stage = (Stage) cbDestino.getScene().getWindow();
+		stage.setX(event.getScreenX() + xOffset);
+		stage.setY(event.getScreenY() + yOffset);
+	}
+
+	@FXML
+	void windowPressed(MouseEvent event) {
+		Stage stage = (Stage) cbDestino.getScene().getWindow();
+		xOffset = stage.getX() - event.getScreenX();
+		yOffset = stage.getY() - event.getScreenY();
 	}
 
 	private boolean checkFields() {
