@@ -20,6 +20,7 @@ public class Graphic {
 		this.message = "";
 		this.messageList = new ArrayList<>();	
 		
+		
 	}
 	
 	public void bestFasterWay(int start) {
@@ -234,6 +235,7 @@ public class Graphic {
 	
 	
 	public int[] dijkstra(int[][] adjacencyMatrix,int startVertex){
+		messageList.clear();
 	
 		int nVertices = adjacencyMatrix[0].length;
 

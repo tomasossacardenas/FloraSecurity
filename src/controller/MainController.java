@@ -103,11 +103,11 @@ public class MainController implements Initializable {
 				taRoute.setText("Ya te encuentras en el lugar a donde deseas ir");
 				
 			}
-			/*		
+					
 			for (int h =0;h<route.length;h++) {
 				System.out.println("ROUTE: "+route[h]);
 			}
-			*/
+			
 			boolean stop = false;
 			if (route!=null) {
 				for (int i=0;i<route.length;i++) {
@@ -155,7 +155,10 @@ public class MainController implements Initializable {
 				taRoute.setText("Ya te encuentras en el lugar a donde deseas ir");
 			}
 			
-		
+			for (int h =0;h<route.length;h++) {
+				System.out.println("ROUTE: "+route[h]);
+			}
+			
 			boolean stop = false;
 			
 			if (route!=null) {
